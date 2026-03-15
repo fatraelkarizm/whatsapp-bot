@@ -128,21 +128,19 @@ export default function LandingPage() {
           <div className="mx-auto max-w-4xl text-center">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-black/5 bg-white/70 px-4 py-2 text-xs font-semibold text-black/70 backdrop-blur">
               <StatusIndicator isLive={botStatus.isLive} />
-              <span>Premium app ecosystem for your business</span>
+              <span>Paket aplikasi premium paling dicari market</span>
             </div>
 
-            <h1 className="text-balance text-4xl font-semibold leading-tight sm:text-5xl lg:text-[4rem]">
-              The Future of Digital Product
+            <h1 className="text-balance text-4xl font-semibold leading-tight sm:text-5xl lg:text-[3.5rem] xl:text-[3.8rem]">
+              Jualan Aplikasi Premium
               <br />
-              <span className="text-accent-strong">
-                Commerce with Smart Automation
-              </span>
+              <span className="text-accent-strong">Netflix, CapCut, Canva & More</span>
             </h1>
 
             <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-black/60 sm:text-lg">
-              Temukan produk digital premium, source code siap pakai, dan
-              otomatisasi WhatsApp yang bikin proses bisnismu lebih cepat, aman,
-              dan scalable.
+              Mulai dari akun Netflix, CapCut Pro, Canva Pro, sampai tools
+              premium lainnya. Cocok buat dipakai sendiri atau dijual ulang
+              dengan margin aman dan supply yang stabil.
             </p>
 
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
@@ -150,7 +148,7 @@ export default function LandingPage() {
                 href="#products"
                 className="inline-flex items-center gap-2 rounded-full bg-accent-strong px-7 py-3 font-semibold text-white transition hover:brightness-110"
               >
-                Mulai Belanja
+                Beli Sekarang
                 <ArrowUpRight className="h-4 w-4" />
               </a>
 
@@ -158,7 +156,7 @@ export default function LandingPage() {
                 href="https://wa.me/yournumber"
                 className="rounded-full border border-black/10 bg-white px-7 py-3 font-semibold text-black/85 transition hover:border-accent-strong"
               >
-                Hubungi Admin
+                Gabung Reseller
               </a>
             </div>
 
@@ -183,45 +181,53 @@ export default function LandingPage() {
               <BarChart3 className="h-4 w-4" />
             </div>
 
-            <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 lg:flex-row lg:items-end">
-              <div className="rounded-4xl border border-white/10 bg-[linear-gradient(165deg,#0f4a53,#0c3840)] p-6 text-white shadow-[0_14px_35px_rgba(8,35,40,0.32)] transition lg:h-56 lg:w-[18%] lg:-translate-y-2 lg:hover:-translate-y-3">
-                <h3 className="text-[3rem] font-semibold leading-none">100+</h3>
-                <p className="mt-4 text-[1rem] leading-relaxed text-white/85">
+            <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 lg:flex-row lg:items-stretch">
+              <div className="hero-card-enter hero-card-delay-1 rounded-4xl border border-white/10 bg-[linear-gradient(165deg,#0f4a53,#0c3840)] p-6 text-white shadow-[0_14px_35px_rgba(8,35,40,0.32)] transition lg:h-56 lg:w-[18%] lg:hover:-translate-y-1">
+                <div className="flex h-full flex-col">
+                  <h3 className="text-[3rem] font-semibold leading-none">100+</h3>
+                  <p className="mt-3 text-[1rem] leading-relaxed text-white/85">
                   Klien aktif dan creator yang langganan produk Digicy.
-                </p>
+                  </p>
+                </div>
               </div>
 
-              <div className="relative rounded-4xl border border-black/5 bg-white p-6 shadow-[0_16px_40px_rgba(20,33,52,0.08)] transition lg:h-56 lg:w-[33%] lg:hover:-translate-y-1">
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#eaf8ef] px-2.5 py-1 text-xs text-[#20693f]">
-                  <CircleCheck className="h-3.5 w-3.5" />
-                  Project Completed
+              <div className="hero-card-enter hero-card-delay-2 relative rounded-4xl border border-black/5 bg-white p-6 shadow-[0_16px_40px_rgba(20,33,52,0.08)] transition lg:h-56 lg:w-[33%] lg:hover:-translate-y-1">
+                <div className="flex h-full flex-col">
+                  <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#eaf8ef] px-2.5 py-1 text-xs text-[#20693f]">
+                    <CircleCheck className="h-3.5 w-3.5" />
+                    Project Completed
+                  </div>
+                  <h3 className="text-[3rem] font-semibold leading-none text-black/90">
+                    1951+
+                  </h3>
+                  <p className="mt-3 text-[1.05rem] text-black/55">
+                    Naik 126 transaksi digital sukses bulan ini.
+                  </p>
                 </div>
-                <h3 className="text-[3rem] font-semibold leading-none text-black/90">
-                  1951+
-                </h3>
-                <p className="mt-4 text-[1.05rem] text-black/55">
-                  Naik 126 transaksi digital sukses bulan ini.
-                </p>
                 <div className="absolute right-5 top-5 h-2.5 w-2.5 rounded-full bg-emerald-400"></div>
               </div>
 
-              <div className="rounded-4xl border border-[#cbe7a7] bg-linear-to-b from-[#dff6be] to-[#c7eaa2] p-6 text-[#1f3b2e] shadow-[0_12px_30px_rgba(126,172,90,0.18)] transition lg:h-56 lg:w-[18%] lg:hover:-translate-y-1">
-                <h3 className="text-[3rem] font-semibold leading-none">6+</h3>
-                <p className="mt-4 text-[1rem] leading-relaxed text-[#2f5a46]">
+              <div className="hero-card-enter hero-card-delay-3 rounded-4xl border border-[#cbe7a7] bg-linear-to-b from-[#dff6be] to-[#c7eaa2] p-6 text-[#1f3b2e] shadow-[0_12px_30px_rgba(126,172,90,0.18)] transition lg:h-56 lg:w-[18%] lg:hover:-translate-y-1">
+                <div className="flex h-full flex-col">
+                  <h3 className="text-[3rem] font-semibold leading-none">6+</h3>
+                  <p className="mt-3 text-[1rem] leading-relaxed text-[#2f5a46]">
                   Tahun pengalaman deliver produk premium.
-                </p>
+                  </p>
+                </div>
               </div>
 
-              <div className="rounded-4xl border border-white/10 bg-[radial-gradient(circle_at_88%_5%,rgba(110,255,211,0.2),transparent_38%),linear-gradient(165deg,#12373d,#0a252a)] p-7 text-white shadow-[0_16px_42px_rgba(7,29,32,0.35)] transition lg:h-60 lg:w-[31%] lg:-translate-y-4 lg:hover:-translate-y-5">
-                <Rocket className="h-6 w-6 text-emerald-300" />
-                <p className="mt-9 text-[2rem] font-semibold leading-[1.06] text-white/95">
-                  Achieve optimal
-                  <br />
-                  productivity
-                </p>
-                <p className="mt-3 text-[1rem] text-white/78">
-                  Optimalkan alur jualan digital pakai automasi yang stabil.
-                </p>
+              <div className="hero-card-enter hero-card-delay-4 rounded-4xl border border-white/10 bg-[radial-gradient(circle_at_88%_5%,rgba(110,255,211,0.2),transparent_38%),linear-gradient(165deg,#12373d,#0a252a)] p-7 text-white shadow-[0_16px_42px_rgba(7,29,32,0.35)] transition lg:h-56 lg:w-[31%] lg:hover:-translate-y-1">
+                <div className="flex h-full flex-col">
+                  <Rocket className="h-6 w-6 text-emerald-300" />
+                  <p className="mt-auto text-[1.85rem] font-semibold leading-[1.06] text-white/95">
+                    Mulai reseller
+                    <br />
+                    lebih produktif
+                  </p>
+                  <p className="mt-3 text-[1rem] text-white/78">
+                    Optimalkan alur jualan digital pakai automasi yang stabil.
+                  </p>
+                </div>
               </div>
             </div>
           </div>

@@ -1,4 +1,6 @@
+import { UserRole } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
+import { requireRole } from "@/lib/auth-guards";
 import { NextResponse } from "next/server";
 
 export async function PUT(
@@ -6,6 +8,11 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
+    const { response } = await requireRole([UserRole.ADMIN]);
+    if (response) {
+      return response;
+    }
+
     const body = await request.json();
     const { name, price, description, image, downloadUrl } = body;
 
@@ -31,6 +38,11 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
+    const { response } = await requireRole([UserRole.ADMIN]);
+    if (response) {
+      return response;
+    }
+
     await prisma.product.delete({
       where: { id: params.id },
     });

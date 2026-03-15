@@ -1,4 +1,6 @@
+import { UserRole } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
+import { requireRole } from "@/lib/auth-guards";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -14,6 +16,11 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    const { response } = await requireRole([UserRole.ADMIN]);
+    if (response) {
+      return response;
+    }
+
     const body = await request.json();
     const { name, price, description, image, downloadUrl } = body;
 

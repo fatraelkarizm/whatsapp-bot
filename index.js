@@ -9,8 +9,32 @@ const { Boom } = require("@hapi/boom")
 const pino = require("pino")
 const chalk = require("chalk")
 const readline = require("readline")
-const { resolve } = require("path")
+const { resolve, join } = require("path")
 const { version } = require("os")
+const { Pool } = require('pg')
+require('dotenv').config({ path: join(__dirname, 'frontend', '.env') })
+
+// Database Setup for Sharing with Frontend (PostgreSQL)
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL
+})
+
+async function updateBotStatus(isLive) {
+    try {
+        const now = new Date().toISOString()
+        const query = `
+            INSERT INTO "BotStatus" (id, "isLive", "lastSeen", "updatedAt")
+            VALUES ('singleton', $1, $2, $3)
+            ON CONFLICT(id) DO UPDATE SET
+                "isLive" = EXCLUDED."isLive",
+                "lastSeen" = EXCLUDED."lastSeen",
+                "updatedAt" = EXCLUDED."updatedAt"
+        `
+        await pool.query(query, [isLive, now, now])
+    } catch (err) {
+        console.error('Failed to update bot status in DB:', err)
+    }
+}
 
 // Metode Pairing
 const usePairingCode = true
@@ -86,6 +110,12 @@ async function connectToWhatsApp() {
             }
         } else if (connection === "open") {
             console.log(chalk.green("✔ Bot Berhasil Terhubung Ke WhatsApp"))
+            updateBotStatus(true)
+            
+            // Periodically update lastSeen every minute
+            setInterval(() => {
+                updateBotStatus(true)
+            }, 60000)
         }
     })
 
@@ -104,7 +134,7 @@ async function connectToWhatsApp() {
         const randomColor = listColor[Math.floor(Math.random() * listColor.length)]
 
         console.log(
-            chalk.yellow.bold("Store Bot"),
+            chalk.yellow.bold("Digicy Store"),
             chalk.green.bold("[ WhatsApp ]"),
             chalk[randomColor](pushname),
             chalk[randomColor](" : "),

@@ -28,3 +28,19 @@ model BotStatus {
   lastSeen  DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+enum UserRole {
+  ADMIN
+  RESELLER
+  GUEST
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         UserRole @default(RESELLER)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

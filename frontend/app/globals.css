@@ -29,3 +29,40 @@ body {
 * {
   border-color: #e5e7eb;
 }
+
+@keyframes heroCardEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(26px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hero-card-enter {
+  animation: heroCardEnter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-card-delay-1 {
+  animation-delay: 70ms;
+}
+
+.hero-card-delay-2 {
+  animation-delay: 140ms;
+}
+
+.hero-card-delay-3 {
+  animation-delay: 220ms;
+}
+
+.hero-card-delay-4 {
+  animation-delay: 300ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-card-enter {
+    animation: none;
+  }
+}
