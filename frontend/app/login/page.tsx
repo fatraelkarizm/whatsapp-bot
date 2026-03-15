@@ -44,7 +44,7 @@ export default function LoginPage() {
         return;
       }
 
-      if (data.user?.role === "ADMIN") {
+      if (data.user) {
         router.push(nextPath === "/" ? "/admin" : nextPath);
       } else {
         router.push("/");

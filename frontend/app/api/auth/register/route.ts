@@ -1,6 +1,6 @@
-import { UserRole } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { resolveRegisterRole } from "@/lib/roles";
 import {
   AUTH_COOKIE_NAME,
   getAuthCookieMaxAge,
@@ -38,13 +38,15 @@ export async function POST(request: Request) {
     }
 
     const passwordHash = await hashPassword(password);
+    const usersCount = await prisma.user.count();
+    const role = resolveRegisterRole({ email, usersCount });
 
     const user = await prisma.user.create({
       data: {
         name,
         email,
         passwordHash,
-        role: UserRole.RESELLER,
+        role,
       },
       select: {
         id: true,
@@ -56,6 +58,7 @@ export async function POST(request: Request) {
 
     const token = await signAuthToken({
       userId: user.id,
+      name: user.name,
       email: user.email,
       role: user.role,
     });

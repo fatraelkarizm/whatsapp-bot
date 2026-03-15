@@ -5,6 +5,7 @@ import { AUTH_COOKIE_NAME, verifyAuthToken } from "@/lib/auth";
 
 export type AuthUser = {
   userId: string;
+  name: string;
   email: string;
   role: UserRole;
 };

@@ -15,6 +15,7 @@ const secretKey = new TextEncoder().encode(jwtSecret);
 
 export type AuthTokenPayload = {
   userId: string;
+  name: string;
   email: string;
   role: UserRole;
 };
@@ -41,9 +42,13 @@ export async function signAuthToken(payload: AuthTokenPayload): Promise<string> 
 export async function verifyAuthToken(token: string): Promise<AuthTokenPayload | null> {
   try {
     const { payload } = await jwtVerify(token, secretKey);
+    const email = String(payload.email);
+    const fallbackName = email.split("@")[0] || "Akun";
+
     return {
       userId: String(payload.userId),
-      email: String(payload.email),
+      name: typeof payload.name === "string" ? payload.name : fallbackName,
+      email,
       role: payload.role as UserRole,
     };
   } catch {

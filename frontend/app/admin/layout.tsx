@@ -10,7 +10,7 @@ export default async function AdminLayout({
 }) {
   const user = await getAuthUserFromCookie();
 
-  if (!user || user.role !== UserRole.ADMIN) {
+  if (!user || (user.role !== UserRole.ADMIN && user.role !== UserRole.RESELLER)) {
     redirect("/login?next=/admin");
   }
 

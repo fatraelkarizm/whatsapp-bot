@@ -26,6 +26,18 @@ interface BotStatus {
   lastSeen: string | null;
 }
 
+interface AuthUser {
+  userId: string;
+  name: string;
+  email: string;
+  role: "ADMIN" | "RESELLER" | "GUEST";
+}
+
+interface AuthSessionResponse {
+  user: AuthUser | null;
+  role: "ADMIN" | "RESELLER" | "GUEST";
+}
+
 const StatusIndicator = ({ isLive }: { isLive: boolean | null }) => {
   if (isLive === null) return null;
   return (
@@ -50,19 +62,23 @@ export default function LandingPage() {
     isLive: false,
     lastSeen: null,
   });
+  const [currentUser, setCurrentUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [prodRes, statusRes] = await Promise.all([
+        const [prodRes, statusRes, authRes] = await Promise.all([
           fetch("/api/products"),
           fetch("/api/bot-status"),
+          fetch("/api/auth/me", { cache: "no-store" }),
         ]);
         const prodData = await prodRes.json();
         const statusData = await statusRes.json();
+        const authData = (await authRes.json()) as AuthSessionResponse;
         setProducts(prodData);
         setBotStatus(statusData);
+        setCurrentUser(authData.user);
       } catch (error) {
         console.error("Failed to fetch data:", error);
       } finally {
@@ -111,10 +127,10 @@ export default function LandingPage() {
 
           <div className="flex items-center gap-3">
             <Link
-              href="/admin"
+              href={currentUser ? "/admin" : "/login"}
               className="rounded-full bg-accent-strong px-6 py-2.5 text-sm font-semibold text-white transition hover:brightness-110"
             >
-              Admin Panel
+              {currentUser ? currentUser.name : "Login"}
             </Link>
           </div>
         </div>

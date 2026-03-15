@@ -1,5 +1,7 @@
+import { UserRole } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { isAdminEmail } from "@/lib/roles";
 import {
   AUTH_COOKIE_NAME,
   getAuthCookieMaxAge,
@@ -46,10 +48,22 @@ export async function POST(request: Request) {
       );
     }
 
+    let effectiveRole = user.role;
+
+    if (effectiveRole !== UserRole.ADMIN && isAdminEmail(user.email)) {
+      const updatedUser = await prisma.user.update({
+        where: { id: user.id },
+        data: { role: UserRole.ADMIN },
+        select: { role: true },
+      });
+      effectiveRole = updatedUser.role;
+    }
+
     const token = await signAuthToken({
       userId: user.id,
+      name: user.name,
       email: user.email,
-      role: user.role,
+      role: effectiveRole,
     });
 
     const response = NextResponse.json(
@@ -58,7 +72,7 @@ export async function POST(request: Request) {
           id: user.id,
           name: user.name,
           email: user.email,
-          role: user.role,
+          role: effectiveRole,
         },
       },
       { status: 200 }
